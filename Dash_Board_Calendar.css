@@ -1,0 +1,509 @@
+
+/* ------------------- Calendar Wrapper ------------------- */
+.calendar-wrapper {
+  position: relative; /* Để hỗ trợ position tuyệt đối bên trong */
+  display: inline-block; /* Hoặc flex tùy theo layout của bạn */
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+
+/* ------------------- Calendar chính ------------------- */
+.calendar {
+  background-color: rgba(237, 239, 243, 1);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0px 2px rgba(0, 0, 0, 0.15);
+
+  padding: 20px;
+  width: 500px;
+  height: 590px;
+  flex: 1 1 100%;
+
+  position: absolute;
+  right: 155px;
+  top: -25px;
+  z-index: 2;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: transform 1s ease, box-shadow 0.3s ease, width 0.5s ease, border 0.4s ease;
+  animation: Calender-fadeInUp 5s ease-out;
+  overflow: visible; /* Đảm bảo hiệu ứng không bị che mất */
+}
+
+.calendar:hover {
+  transform: translateY(-30px);
+  border: 1px solid rgba(	237, 239, 243, 0.5);
+  box-shadow: 0 0 12px rgb(255, 255, 255);
+  box-shadow: 0 12px 15px rgb(200, 200, 200, 0.75);
+  box-shadow: 0 12px 20px #a2f9ff;
+}
+
+.calendar::after {
+  content: "";
+  position: absolute;
+  inset: -7.5px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.calendar:hover::after {
+  opacity: 1;
+}
+
+.calendar.bounce {
+  animation: bounceBack 1s ease;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+@keyframes Calender-fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(1000px);  
+    box-shadow: 0 0px 10px #66f5ff;
+    box-shadow: 0 0px 20px #66f5ff;
+    box-shadow: 0 0px 40px #66f5ff;
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(75px);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
+
+
+
+/* ------------------- Calendar Top (shape nhỏ) ------------------- */
+.calendar-top {
+  background: linear-gradient(to bottom, rgba(153, 160, 170, 0.25) 0%, rgba(237, 239, 243, 0.25) 100%);
+  border: 1.25px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  
+  padding: 20px;
+  width: 160px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+
+  pointer-events: auto;
+  user-select: none;          /* chuẩn */
+
+  position: absolute;
+  top: 60px;
+  right: 100px; /* 💡 Phải là 100px để match keyframes */
+  z-index: 1;
+
+
+  /* XÓA transition: transform & box-shadow để không ảnh hưởng animation */
+  transition: opacity 2s ease, transform 0.6s ease-in-out, box-shadow 0.6s ease-in-out;
+  
+}
+
+.calendar-top.rising {
+  opacity: 1;
+  animation: calendarTopRise 1s forwards;
+}
+
+.calendar-top.falling {
+  opacity: 0;
+  animation: calendarTopFall 2s forwards;
+}
+
+.calendar-top.z-top {
+  z-index: 15;
+  animation: pulse 8.5s ease-in-out infinite;
+}
+
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 10px;
+  font-size: 2.05rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  top: -15px;
+  width: 100%;
+  text-align: center;
+}
+
+.calendar-header span {
+  padding-left: 45px; /* hoặc giá trị khác tuỳ ý */
+}
+
+.calendar-icon-absolute {
+  position: absolute;
+  left: -65px;
+  width: 150px;
+  height: 150px;
+  z-index: 1;
+}
+
+.calendar-lottie {
+  width: 100%;
+  height: 100%;
+}
+
+
+.calendar-dates {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-top: -10px;
+}
+
+.calendar-dates strong {
+  font-weight: 800;
+  display: block;
+  margin-top: 10px;
+  color: black;
+}
+
+.calendar-date {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #556;
+}
+
+.date-group {
+  text-align: center;
+  margin: 0;
+  padding: 0px 0;
+  line-height: 1.25;
+}
+
+.date-group strong {
+  display: block;
+  font-size: 2.05rem;
+  margin-bottom: 4px;
+}
+
+.go-to-year {
+  background: #C7D0DE;
+  margin-top: 45px;
+  padding: 20px;
+  width: 80%;
+  border-radius: 20px;
+  min-height: 115px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  cursor: pointer;
+}
+
+/* Hiệu ứng khối */
+.go-to-year:hover {
+    transform: translateY(-5px) scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  text-shadow: 0px 5px 1px rgba(175, 175, 175, 0.75);
+  /* Box shadow nhiều lớp tạo khối 3D nổi */
+  box-shadow:
+   
+    0px 5px 5px rgba(222.555, 222.555, 222.555, 1);
+  
+}
+
+/* Chữ bên trong */
+.go-link {
+  font-size: 3rem;
+  font-weight: 650;
+  color: #ffffff;
+  text-decoration: none;
+  line-height: 1.2;
+  text-align: center;
+  transition: color 0.5s ease, transform 0.3s ease;
+}
+
+/* Khi hover vào khối, chữ bên trong cũng đổi màu và nổi lên */
+.go-to-year:hover .go-link {
+  color: #646464;
+  transform: scale(1.05);
+}
+
+
+
+/* ------------------- Animation ------------------- */
+.calendar-top.rising {
+  animation: calendarTopRise 1s forwards;
+}
+
+.calendar-top.falling {
+  animation: calendarTopFall 2s forwards;
+}
+@keyframes bounceBack {
+  0%   { transform: translateY(-20px); }
+  40%  { transform: translateY(4px); }
+  70%  { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes calendarTopRise {
+  0%   { top: -1000px;  transform: translateY(0);     box-shadow: 0 0 0 rgba(255,255,255,0); }
+  50%  { right: -250px; transform: translateY(-10px);     box-shadow: 0 0 1px 0px rgba(240,255,255,0.4); }
+  100% { right: -150px;  transform: translateY(-10px); box-shadow: 0px 0px 10px 0px rgb(255, 255, 255) }
+}
+
+@keyframes calendarTopFall {
+  0%   { right: -150px;  transform: translateY(-10px); box-shadow: 0px 0px 10px 0px rgb(255, 255, 255); }
+  50%  { right: -250px; transform: translateY(0px);     box-shadow: 0 0 10px 0px rgba(240,255,255,0.3); }
+  100% { top: 1000px;  transform: translateY(0px);     box-shadow: 0 0 0 rgba(255,255,255,0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.015); }
+}
+
+
+
+
+
+/* -------------------- Month Select -------------------- */
+:root {
+  --month-picker-offset: -132px; /* 🟡 Chỉnh ở đây để đổi vị trí cuộn lên/xuống */
+}
+
+/* Month Picker container */
+.month-picker-container {
+  position: relative;
+  width: 450px; /* Đặt chiều rộng cố định để căn giữa dễ */
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 50;
+  transform: translateX(-25px);
+}
+
+/* Phần chọn tháng */
+.selected-month {
+  font-family: 'Baloo', sans-serif;
+  text-align: center;
+  font-weight: bold;
+  height: 80px;
+  width: 100%;
+  margin-bottom: 10px;
+  cursor: pointer;           /* Cho biết đây là phần có thể click */
+  background:rgba(199, 208, 222, 0.75);
+
+  font-size: 2.5rem;
+  border-radius: 12.5px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 1); /* Trắng 100% */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.075);
+  transition: all 0.5s ease, text-shadow 1s ease;
+
+  /* 🔽 Thêm 3 dòng dưới để căn giữa hoàn hảo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto !important; /* ✅ Cho phép click */
+}
+
+#monthPicker,
+#monthPicker * {
+  user-select: none;
+ 
+}
+
+/* Hiệu ứng hover giống go-to-year cho selected-month */
+.selected-month:hover {
+  transform: translateY(-5px) scale(1.025);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 5px rgba(222, 222, 222, 1);
+  color: rgb(100, 100, 100);
+  text-shadow: 0px 5px 1px rgba(175, 175, 175, 1);
+  background: radial-gradient(circle, rgba(199, 208, 222, 0.75) 0%, rgba(199, 208, 222, 0) 75%);
+}
+
+/* Khi danh sách đang mở, vẫn giữ hiệu ứng hover cho selected-month */
+.month-picker-container.show .selected-month {
+  transform: translateY(-5px) scale(1.025);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 5px rgba(222, 222, 222, 1);
+  color: rgba(255, 255, 255, 0);
+}
+
+/* Vùng danh sách */
+.month-list-wrapper {
+  position: absolute;
+  top: var(--month-picker-offset);
+  left: 0;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: scroll;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+  transform: translateY(5px);
+
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+  scroll-snap-type: y mandatory;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+
+/* Khi hiện */
+.month-picker-container.show .month-list-wrapper {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* Ẩn scrollbar */
+.month-list-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Danh sách tháng */
+.month-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.month-list li {
+  font-family: 'Baloo', sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 3rem;
+  padding: 10px 0;
+  color: white;
+  opacity: 0.25;
+  scroll-snap-align: center;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+
+
+
+/* ------------------- Calendar Days ------------------- */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+.calendar-grid div {
+  background: #ecf0f1;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.calendar-day {
+  background-color: #C7D0DE; /* ✅ Thêm dòng này */
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Baloo', sans-serif;
+  font-weight: 500;
+  color: rgb(100, 100, 100);
+  font-size: 2.2rem;
+  aspect-ratio: 1 / 0;
+  transition: transform 0.2s, background 0.3s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.calendar-day:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px) scale(1.025);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 5px rgba(222, 222, 222, 1);
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 4px 1px rgba(200, 200, 200, 0.75);
+}
+
+
+
+.calendar-day.hidden {
+  display: none;
+}
+
+.calendar-grid a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.calendar-day.last-31 {
+  position:absolute;
+  width: 435px;
+  height: 60px;
+  font-size: 3rem;
+  font-weight:500;
+  background-color: #edeff3;
+  color: rgb(100,100,100);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  text-align: center;
+  border-radius: 12.5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.075);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+
+.calendar-day.last-31:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(5px) scale(1.025);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 5px rgba(222, 222, 222, 1);
+  color: #ffffff;
+  text-shadow: 0px 4px 1px rgba(200, 200, 200, 0.75);
+}

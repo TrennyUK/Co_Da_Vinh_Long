@@ -1,0 +1,42 @@
+/* Icon Menu */
+.menu-toggle {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 1001;
+  font-size: 5rem;
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+/* Khi mở menu: đổi màu + flip dấu >> thành << */
+.menu-toggle.active {
+  left: 275px;
+  color: rgb(255, 255, 255);
+}
+
+.menu-toggle.active .icon-text {
+  transform: scaleX(-1); /* lật ngang */
+  display: inline-block; /* cần thiết để flip có tác dụng */
+  transition: transform 0.3s ease;
+}
+
+
+/* Menu bên trái */
+.side-menu {
+  position: absolute;
+  top: 0;
+  left: -350px;
+  width: 220px;
+  height: 100%;
+  background: white;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.side-menu.open {
+  left: 0;
+}
