@@ -3,18 +3,18 @@ google.charts.load("current", { packages: ["corechart"] });
 
 // ───── Biến cấu hình Google Sheets ─────
 const API_KEY = 'AIzaSyA1fRhQE_tbpwr0w7mc4kYWPWeGpN2I4-k';
-const SHEET_ID_NAMES = '1bv0_DB47DF8YBiPJnTHw434H1RBQv3q88lPXNJmbGrk';
-const SHEET_ID_HOURS = '1uIU21ZVrdAzC6SwvsYDrbRh5gL4aB2tsMIeUyJ5RvCs';
-const RANGE_NAMES = 'Day 1!C5:C34';
+const SHEET_ID_NAMES = '1AHRxpnfFQ4dUUDR7eZ_u5XnDeOPBF7Npu_5_yefjvOY';
+const SHEET_ID_HOURS = '1eRodhcIJNIvp05O8h-ilXBuzwRglCSOkVrqjTIizshU';
+const RANGE_NAMES = 'Day 1!C5:C49';
 
 // ───── Hàm fetch lương từ Google Sheets theo tháng ─────
 // 📌 sheetId: ID file Sheets ứng với từng tháng
 // 📌 sheetName: "Month 1", "Month 2", v.v...
 // 📌 Lấy giá trị từ ô AM35 và hiển thị vào .salary
 function fetchSalaryFromSheet(sheetId, sheetName) {
-    const CELL = 'AN35';
+    const CELL = 'AN50';
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(sheetName)}!${CELL}?key=${API_KEY}`;
-
+    
     fetch(url)
         .then(response => {
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -97,7 +97,7 @@ async function drawChart() {
     try {
         const startDayText = document.getElementById("start-day").textContent;
         const monthNumber = parseInt(startDayText.split("/")[1]);
-        const RANGE_HOURS_DYNAMIC = `Month ${monthNumber}!AJ5:AJ34`;
+        const RANGE_HOURS_DYNAMIC = `Month ${monthNumber}!AJ5:AJ49`;
 
         const [namesRaw, hoursRaw] = await Promise.all([
             fetchSheetData(SHEET_ID_NAMES, RANGE_NAMES),
