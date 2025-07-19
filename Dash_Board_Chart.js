@@ -3,8 +3,8 @@ google.charts.load("current", { packages: ["corechart"] });
 
 // ───── Biến cấu hình Google Sheets ─────
 const API_KEY = 'AIzaSyA1fRhQE_tbpwr0w7mc4kYWPWeGpN2I4-k';
-const SHEET_ID_NAMES = '1AHRxpnfFQ4dUUDR7eZ_u5XnDeOPBF7Npu_5_yefjvOY';
-const SHEET_ID_HOURS = '1eRodhcIJNIvp05O8h-ilXBuzwRglCSOkVrqjTIizshU';
+const SHEET_ID_NAMES = '1kWh_sK0q31JNGhDUQkHy9kWlRab5LZdEfYsgyEOohmk';
+const SHEET_ID_HOURS = '11ZXTGKozUB8judeExM3MJdRjPMhl6wfa4RCw4EO5X10';
 const RANGE_NAMES = 'Day 1!C5:C49';
 
 // ───── Hàm fetch lương từ Google Sheets theo tháng ─────
