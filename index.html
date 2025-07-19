@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bảng điều khiển quản lý tiền lương</title>
+
+  <!-- CSS & Fonts -->
+  <link rel="stylesheet" href="Dash_Board_Year.css" />
+  <link rel="stylesheet" href="Dash_Board_Calendar.css" />
+  <link rel="stylesheet" href="Dash_Board_Menu.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Baloo&display=swap" rel="stylesheet">
+  
+  <!-- Google Charts -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <!-- dotLottie Player -->
+  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    
+    <!-- Icon Menu -->
+    <div id="menuToggle" class="menu-toggle">
+      <span class="icon-text">>></span>
+    </div>
+
+    <!-- 📋 Menu trượt bên trái -->
+    <nav id="sideMenu" class="side-menu">
+      <!-- Để trống, sẽ thêm sau -->
+    </nav>
+
+
+    <!-- Header -->
+    <header class="dashboard-header">
+      <h1 id="page-title">Bảng điều khiển quản lý tiền lương</h1>
+    </header>
+
+    <main class="main-content" style="display: flex; gap: 20px; align-items: flex-start;">
+      <!-- Tổng lương -->
+      <section class="card hover-trigger">
+        <div class="card-header">
+          <h2>Tổng Lương</h2>
+          <span class="salary">Month</span>
+        </div>
+
+        <div class="card-body">
+          <!-- ✅ Tiêu đề sẽ được JS cập nhật đúng tháng -->
+       
+          <div class="scroll-wrapper">
+            <div id="chart_inner" class="scrollable-chart"></div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <span>Tổng Quan</span>
+           <span class="overview-line"></span>
+        </div>
+      </section>
+
+      <!-- Lịch -->
+      <div class="calendar-wrapper hover-trigger">
+        <aside class="calendar">
+
+          <!-- Month Picker -->
+          <div class="month-picker-container" id="monthPicker">
+            <div class="selected-month" id="selectedMonth"><span class="month-text">January</span></div>
+
+            <div class="month-list-wrapper" id="monthListWrapper">
+              <ul class="month-list" id="monthList">
+                <li>January</li><li>February</li><li>March</li><li>April</li>
+                <li>May</li><li>June</li><li>July</li><li>August</li>
+                <li>September</li><li>October</li><li>November</li><li>December</li>
+              </ul>
+            </div>
+
+            <div id="calendar-grid" class="calendar-grid"></div>
+           
+
+          </div>
+
+          <!-- Nội dung lịch -->
+          <div class="calendar-top floating">
+            <div class="calendar-header">
+              <div class="calendar-icon-absolute">
+                <dotlottie-player
+                  src="https://lottie.host/966cfb95-1d76-4669-ae41-a5e561f27e1c/ADmURlS433.lottie"
+                  background="transparent"
+                  speed="0.75"
+                  class="calendar-lottie"
+                  loop autoplay>
+                </dotlottie-player>
+              </div>
+              <span>Calendar</span>
+            </div>
+
+            <div class="calendar-dates">
+              <div class="date-group">
+                <strong>Start Day</strong>
+                <div id="start-day" class="calendar-date">--/--/----</div>
+              </div>
+              <div class="date-group">
+                <strong>End Day</strong>
+                <div id="end-day" class="calendar-date">--/--/----</div>
+              </div>
+            </div>
+
+            <div class="go-to-year">
+              <a href="#" id="goToYearLink" class="go-link">Go To<br>Year</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="Dash_Board_Chart.js"></script>
+  <script src="Dash_Board_Calendar.js"></script>  
+  <script src="Dash_Board_Animation.js"></script>
+  <script src="Dash_Board_Menu.js"></script>
+   
+</body>
+</html>
